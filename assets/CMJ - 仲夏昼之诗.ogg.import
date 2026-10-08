@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bk7qp2g358ocl"
+path="res://.godot/imported/CMJ - 仲夏昼之诗.ogg-0f1bb834faaf87a5882d3e271fbce0fa.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/CMJ - 仲夏昼之诗.ogg"
+dest_files=["res://.godot/imported/CMJ - 仲夏昼之诗.ogg-0f1bb834faaf87a5882d3e271fbce0fa.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://o6o65ja6i2ku"]
+
+[ext_resource type="Script" uid="uid://cxxjgjkybmxkv" path="res://audio_stream_player.gd" id="2_i5m0e"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" unique_id=478647697]
+volume_db = -13.176
+script = ExtResource("2_i5m0e")

@@ -1,0 +1,188 @@
+[gd_scene format=4 uid="uid://u4jue6s4jt6a"]
+
+[ext_resource type="PackedScene" uid="uid://bd7dmldcl0hs2" path="res://player.tscn" id="1_0e48y"]
+[ext_resource type="FontFile" uid="uid://c8ijo8g81axg6" path="res://assets/fusion-pixel-12px-monospaced-zh_hans.ttf" id="2_0hol4"]
+[ext_resource type="PackedScene" uid="uid://7016h85rljcq" path="res://enemy.tscn" id="2_epypp"]
+[ext_resource type="Texture2D" uid="uid://b8j2nd27jkder" path="res://assets/f2615b7f94605a23c27fa9b28a2ca1e3.png" id="3_epypp"]
+[ext_resource type="Script" uid="uid://4mcq6vaikh6k" path="res://enemy.gd" id="4_ir8iy"]
+[ext_resource type="Script" uid="uid://5rcedie3s5dt" path="res://next_level_trigger.gd" id="5_q6r6c"]
+[ext_resource type="PackedScene" uid="uid://cy0gk0rjm65px" path="res://node_2d2.tscn" id="6_kdubu"]
+[ext_resource type="Texture2D" uid="uid://vkpjl1o8dfee" path="res://assets/68fe300579b1904bb971b4e772deced6.png" id="7_d21ai"]
+[ext_resource type="PackedScene" uid="uid://ci2eabheilys1" path="res://bullet.tscn" id="8_rj586"]
+[ext_resource type="PackedScene" uid="uid://yx0opodfesd3" path="res://music1.tscn" id="9_4d7sh"]
+
+[sub_resource type="Gradient" id="Gradient_d21ai"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3xd07"]
+gradient = SubResource("Gradient_d21ai")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rj586"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd07"]
+size = Vector2(19423, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jq8tk"]
+size = Vector2(169, 236)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rj586"]
+texture = ExtResource("7_d21ai")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_t5prh"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_rj586")
+
+[node name="Node2D" type="Node2D" unique_id=1089068263]
+
+[node name="player" parent="." unique_id=275218136 instance=ExtResource("1_0e48y")]
+position = Vector2(-198, -54)
+
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=512600638]
+position = Vector2(156, -131)
+limit_left = -366
+limit_right = 1424
+
+[node name="PointLight2D" type="PointLight2D" parent="player" unique_id=1838022260]
+visible = false
+position = Vector2(-4, 5)
+color = Color(0.05490196, 0.89411765, 0.9529412, 0.2901961)
+texture = SubResource("GradientTexture2D_3xd07")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=834303594]
+position = Vector2(17, -47)
+physics_material_override = SubResource("PhysicsMaterial_rj586")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=490337722]
+position = Vector2(7969, 33)
+shape = SubResource("RectangleShape2D_3xd07")
+
+[node name="Label" type="Label" parent="." unique_id=1220422703]
+visible = false
+offset_left = -268.0
+offset_top = -244.0
+offset_right = -153.0
+offset_bottom = -221.0
+text = "26计算机谷籽璇"
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=477271105]
+layer = 100
+
+[node name="Control" type="Control" parent="UI" unique_id=1341272284]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = 12.0
+offset_right = -28.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthLabel" type="Label" parent="UI/Control" unique_id=747353574]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.61600006
+anchor_top = 0.25800002
+anchor_right = 0.61600006
+anchor_bottom = 0.25800002
+offset_left = -291.0
+offset_top = -191.0
+offset_right = -158.0
+offset_bottom = -146.0
+theme_override_fonts/font = ExtResource("2_0hol4")
+theme_override_font_sizes/font_size = 28
+text = "血量：10"
+
+[node name="GameoverLabel" type="Label" parent="UI/Control" unique_id=469643291]
+visible = false
+layout_mode = 0
+offset_left = -52.0
+offset_top = -8.0
+offset_right = 71.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 41
+text = "失败！"
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control" unique_id=474778953]
+z_index = 100
+layout_mode = 0
+offset_left = -303.0
+offset_top = -197.0
+offset_right = 360.0
+offset_bottom = 171.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Enemy" parent="." unique_id=206569385 instance=ExtResource("2_epypp")]
+visible = false
+collision_layer = 1
+collision_mask = 1
+script = ExtResource("4_ir8iy")
+left_boundary = 4800.0
+right_boundary = 5100.0
+bullect_scene = ExtResource("8_rj586")
+shoot_interval = 1.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=989130847]
+scroll_offset = Vector2(3959, -171)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=12481010]
+modulate = Color(0.15632322, 0.6222522, 0.6386771, 1)
+motion_scale = Vector2(0.8, 1)
+motion_mirroring = Vector2(1918, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=1059670089]
+modulate = Color(1.7770933, 1.7770933, 1.7770933, 1)
+position = Vector2(587, -242)
+texture = ExtResource("3_epypp")
+
+[node name="NextLevelTrigger" type="Area2D" parent="." unique_id=57276033]
+script = ExtResource("5_q6r6c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NextLevelTrigger" unique_id=55926419]
+position = Vector2(1420, -134)
+shape = SubResource("RectangleShape2D_jq8tk")
+
+[node name="Node2D2" parent="." unique_id=1739597612 instance=ExtResource("6_kdubu")]
+position = Vector2(3, 24)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=183245960]
+tile_map_data = PackedByteArray("AAAIAP//AQAAAAAAAAAJAP//AQAAAAAAAAAKAP//AQAAAAAAAAALAP//AQAAAAAAAAAMAP//AQAAAAAAAAANAP//AQAAAAAAAAAOAP//AQAAAAAAAAAHAP//AQAAAAAAAAAGAP//AQAAAAAAAAAFAP//AQAAAAAAAAAEAP//AQAAAAAAAAADAP//AQAAAAAAAAACAP//AQAAAAAAAAABAP//AQAAAAAAAAAAAP//AQAAAAAAAAD/////AQAAAAAAAAD+////AQAAAAAAAAD9////AQAAAAAAAAD8////AQAAAAAAAAD7////AQAAAAAAAAD6////AQAAAAAAAAD5////AQAAAAAAAAD4////AQAAAAAAAAD3////AQAAAAAAAAD2////AQAAAAAAAAD1////AQAAAAAAAAAPAP//AQAAAAAAAAAQAP//AQAAAAAAAAARAP//AQAAAAAAAAASAP//AQAAAAAAAAATAP//AQAAAAAAAAAUAP//AQAAAAAAAAAVAP//AQAAAAAAAAAWAP//AQAAAAAAAAAXAP//AQAAAAAAAAAYAP//AQAAAAAAAAAZAP//AQAAAAAAAAAaAP//AQAAAAAAAAAbAP//AQAAAAAAAAAcAP//AQAAAAAAAAAdAP//AQAAAAAAAAAeAP//AQAAAAAAAAAfAP//AQAAAAAAAAAgAP//AQAAAAAAAAAhAP//AQAAAAAAAAAiAP//AQAAAAAAAAAjAP//AQAAAAAAAAAkAP//AQAAAAAAAAAlAP//AQAAAAAAAAAmAP//AQAAAAAAAAAnAP//AQAAAAAAAAAoAP//AQAAAAAAAAApAP//AQAAAAAAAAAqAP//AQAAAAAAAAArAP//AQAAAAAAAAAsAP//AQAAAAAAAAAtAP//AQAAAAAAAAAuAP//AQAAAAAAAAAvAP//AQAAAAAAAAAwAP//AQAAAAAAAAAxAP//AQAAAAAAAAAyAP//AQAAAAAAAAAzAP//AQAAAAAAAAA0AP//AQAAAAAAAAA1AP//AQAAAAAAAAA2AP//AQAAAAAAAAA3AP//AQAAAAAAAAA4AP//AQAAAAAAAAA5AP//AQAAAAAAAAA6AP//AQAAAAAAAAA7AP//AQAAAAAAAAA8AP//AQAAAAAAAAA9AP//AQAAAAAAAAA+AP//AQAAAAAAAAA/AP//AQAAAAAAAABAAP//AQAAAAAAAABBAP//AQAAAAAAAABCAP//AQAAAAAAAAA=")
+tile_set = SubResource("TileSet_t5prh")
+
+[node name="Bullet" parent="." unique_id=447048874 instance=ExtResource("8_rj586")]
+script = null
+
+[node name="AudioStreamPlayer" parent="." unique_id=1731679132 instance=ExtResource("9_4d7sh")]
+
+[node name="Label2" type="Label" parent="." unique_id=170507591]
+offset_left = 948.0
+offset_top = -177.0
+offset_right = 1031.0
+offset_bottom = -153.0
+theme_override_fonts/font = ExtResource("2_0hol4")
+theme_override_font_sizes/font_size = 20
+text = "冲刺：shift"
+
+[node name="Label3" type="Label" parent="." unique_id=905712631]
+offset_left = 158.0
+offset_top = -171.0
+offset_right = 254.0
+offset_bottom = -143.0
+theme_override_fonts/font = ExtResource("2_0hol4")
+theme_override_font_sizes/font_size = 23
+text = "攻击：X"
+
+[node name="Label4" type="Label" parent="." unique_id=296733972]
+offset_left = 545.0
+offset_top = -272.0
+offset_right = 650.0
+offset_bottom = -250.0
+theme_override_fonts/font = ExtResource("2_0hol4")
+theme_override_font_sizes/font_size = 21
+text = "可以二段跳"

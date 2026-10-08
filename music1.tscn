@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://yx0opodfesd3"]
+
+[ext_resource type="AudioStream" uid="uid://bk7qp2g358ocl" path="res://assets/CMJ - 仲夏昼之诗.ogg" id="1_kwk4h"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" unique_id=1731679132]
+stream = ExtResource("1_kwk4h")
+volume_db = -10.0
+autoplay = true
